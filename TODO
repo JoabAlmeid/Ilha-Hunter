@@ -1,0 +1,15 @@
+*fazer uma tabela nova do banco com a de notas fazendo conexão via chave estrangeira com a do usuário
+
+*certificar que apenas o usuário consegue CRUD suas notas
+
+*ajustar o frontend da página inicial para combinar melhor com a de notas
+
+*procurar meios de automatizar o NPM INSTALL na próxima vez
+
+*aprender estrutura de arquivos
+
+*aprender sobre dividir melhor as funções em arquivos diferentes
+
+*aprender sobre middleware
+
+*dar um jeito de usar um middleware para conectar ambos os arquivos js
