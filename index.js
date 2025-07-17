@@ -76,7 +76,7 @@ app.post(
 );
 
 app.post("/register", async (req, res) => {
-  const email = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
 
   try {
@@ -85,7 +85,7 @@ app.post("/register", async (req, res) => {
     ]);
 
     if (checkResult.rows.length > 0) {
-      req.redirect("/login");
+      res.redirect("/login");
     } else {
       bcrypt.hash(password, saltRounds, async (err, hash) => {
         if (err) {
@@ -107,39 +107,6 @@ app.post("/register", async (req, res) => {
     console.log(err);
   }
 });
-
-passport.use(
-  new Strategy(async function verify(username, password, cb) {
-    try {
-      const result = await db.query("SELECT * FROM users WHERE email = $1 ", [
-        username,
-      ]);
-      if (result.rows.length > 0) {
-        const user = result.rows[0];
-        const storedHashedPassword = user.password;
-        bcrypt.compare(password, storedHashedPassword, (err, valid) => {
-          if (err) {
-            //Error with password check
-            console.error("Error comparing passwords:", err);
-            return cb(err);
-          } else {
-            if (valid) {
-              //Passed password check
-              return cb(null, user);
-            } else {
-              //Did not pass password check
-              return cb(null, false);
-            }
-          }
-        });
-      } else {
-        return cb("User not found");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  })
-);
 
 passport.serializeUser((user, cb) => {
   cb(null, user);
