@@ -39,13 +39,13 @@
       </ul> -->
       <% todos.forEach(todo => {%>
       <div class="item">
-        <form action="/todos/delete/<%= todo.id %>" method="POST" style="display:inline;">
+        <form action="/todos/delete/<%= todo.id %>" class="delete" method="POST" style="display:inline;">
           <button type="submit"><img class="icon"
             src="/assets/icons/icons8-trash-can.svg" alt="pencil image"></button>
         </form>
 
       
-        <p id="title-<%= todo.id %>">
+        <p class="p" id="title-<%= todo.id %>">
           <%= todo.title %>
         </p>
 
