@@ -83,6 +83,12 @@ button.edit {
 
 .icon {
   height: 20px;
+  min-height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border-color: transparent;
+
+  border-width: 0;
 }
 
 input[type="text"] {
