@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minha To-Do List</title>
+  <script>
+    function enableEdit(id) {
+      // Quando clickado em editar, todos os outros campos ficam assim. Sem isso, o segundo campo sendo editado não fecha o primeiro
+      document.querySelectorAll(".todo-item").forEach(item => {
+        const todoId = item.dataset.id;
+        const span = document.getElementById(`title-${todoId}`);
+        const input = document.getElementById(`input-${todoId}`);
+        const saveBtn = document.getElementById(`saveBtn-${todoId}`);
+        const editBtn = document.getElementById(`editBtn-${todoId}`);
+
+        span.style.display = "inline";
+        input.style.display = "none";
+        saveBtn.style.display = "none";
+        editBtn.style.display = "inline";
+      });
+
+      // Torna o campo clickado uma excessão do código acima
+      document.getElementById(`title-${id}`).style.display = "none";
+      document.getElementById(`input-${id}`).style.display = "inline";
+      document.getElementById(`editBtn-${id}`).style.display = "none";
+      const input = document.getElementById(`input-${id}`);
+      input.focus();
+      input.setSelectionRange(input.value.length, input.value.length);
+
+    }
+
+    function handleInput(id) {
+      document.getElementById(`saveBtn-${id}`).style.display = "inline";
+    }
+  </script>
+</head>
+<body>
+  <h1>Minhas Tarefas</h1>
+
+  <form action="/todos/add" method="POST">
+    <input type="text" name="title" placeholder="Nova tarefa" required />
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <ul>
+    <% todos.forEach(todo => { %>
+      <li class="todo-item" data-id="<%= todo.id %>">
+        <span id="title-<%= todo.id %>"><%= todo.title %></span>
+
+        <form action="/todos/edit/<%= todo.id %>" method="POST" style="display:inline;">
+          <input
+            type="text"
+            id="input-<%= todo.id %>"
+            name="title"
+            value="<%= todo.title %>"
+            style="display:none;"
+            oninput="handleInput(<%= todo.id %>)"
+          />
+          <button type="submit" style="display:none;" id="saveBtn-<%= todo.id %>">Salvar</button>
+        </form>
+
+        <button type="button" id="editBtn-<%= todo.id %>" onclick="enableEdit(<%= todo.id %>)">Editar</button>
+
+        <form action="/todos/delete/<%= todo.id %>" method="POST" style="display:inline;">
+          <button type="submit">Remover</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+
+  <form action="/logout" method="POST">
+    <button type="submit">Logout</button>
+  </form>
+</body>
+</html>
