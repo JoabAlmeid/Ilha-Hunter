@@ -52,13 +52,36 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  const { email, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, saltRounds);
-  await db.query("INSERT INTO users (email, password) VALUES ($1, $2)", [
-    email,
-    hashedPassword,
-  ]);
-  res.redirect("/login");
+  const email = req.body.email;
+  const password = req.body.password;
+
+  try {
+    const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+
+    if (checkResult.rows.length > 0) {
+      res.redirect("/login");
+    } else {
+      bcrypt.hash(password, saltRounds, async (err, hash) => {
+        if (err) {
+          console.error("Error hashing password:", err);
+        } else {
+          const result = await db.query(
+            "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *",
+            [email, hash]
+          );
+          const user = result.rows[0];
+          req.login(user, (err) => {
+            console.log("success");
+            res.redirect("/todos");
+          });
+        }
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 router.post("/logout", (req, res) => {

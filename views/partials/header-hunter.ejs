@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <title>Permalist</title>
+  </head>
+  <title>Minha To-Do List</title>
+  <script>
+    function enableEdit(id) {
+      // Quando clickado em editar, todos os outros campos ficam assim. Sem isso, o segundo campo sendo editado não fecha o primeiro
+      document.querySelectorAll(".todo-item").forEach(item => {
+        const todoId = item.dataset.id;
+        const span = document.getElementById(`title-${todoId}`);
+        const input = document.getElementById(`input-${todoId}`);
+        const saveBtn = document.getElementById(`saveBtn-${todoId}`);
+        const editBtn = document.getElementById(`editBtn-${todoId}`);
+
+        span.style.display = "inline";
+        input.style.display = "none";
+        saveBtn.style.display = "none";
+        editBtn.style.display = "inline";
+      });
+
+      // Torna o campo clickado uma excessão do código acima
+      document.getElementById(`title-${id}`).style.display = "none";
+      document.getElementById(`input-${id}`).style.display = "inline";
+      document.getElementById(`editBtn-${id}`).style.display = "none";
+      const input = document.getElementById(`input-${id}`);
+      input.focus();
+      input.setSelectionRange(input.value.length, input.value.length);
+
+    }
+
+    function handleInput(id) {
+      document.getElementById(`saveBtn-${id}`).style.display = "inline";
+    }
+  </script>
+</head>
+<body>

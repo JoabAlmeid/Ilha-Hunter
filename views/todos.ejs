@@ -1,45 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Minha To-Do List</title>
-  <script>
-    function enableEdit(id) {
-      // Quando clickado em editar, todos os outros campos ficam assim. Sem isso, o segundo campo sendo editado não fecha o primeiro
-      document.querySelectorAll(".todo-item").forEach(item => {
-        const todoId = item.dataset.id;
-        const span = document.getElementById(`title-${todoId}`);
-        const input = document.getElementById(`input-${todoId}`);
-        const saveBtn = document.getElementById(`saveBtn-${todoId}`);
-        const editBtn = document.getElementById(`editBtn-${todoId}`);
+<%- include('partials/header-hunter.ejs'); -%>
 
-        span.style.display = "inline";
-        input.style.display = "none";
-        saveBtn.style.display = "none";
-        editBtn.style.display = "inline";
-      });
 
-      // Torna o campo clickado uma excessão do código acima
-      document.getElementById(`title-${id}`).style.display = "none";
-      document.getElementById(`input-${id}`).style.display = "inline";
-      document.getElementById(`editBtn-${id}`).style.display = "none";
-      const input = document.getElementById(`input-${id}`);
-      input.focus();
-      input.setSelectionRange(input.value.length, input.value.length);
-
-    }
-
-    function handleInput(id) {
-      document.getElementById(`saveBtn-${id}`).style.display = "inline";
-    }
-  </script>
-</head>
-<body>
   <h1>Minhas Tarefas</h1>
 
-  <form action="/todos/add" method="POST">
-    <input type="text" name="title" placeholder="Nova tarefa" required />
-    <button type="submit">Adicionar</button>
-  </form>
+    <div class="box">
+  
+ 
 
   <ul>
     <% todos.forEach(todo => { %>
@@ -66,6 +32,11 @@
       </li>
     <% }) %>
   </ul>
+  <form action="/todos/add" method="POST">
+          <input type="text" name="title" placeholder="Nova Tarefa" autocomplete="off" autofocus="true" required/>
+          <button class="add" type="submit" name="list">+</button>
+        </form>
+  </div>
 
   <form action="/logout" method="POST">
     <button type="submit">Logout</button>
