@@ -20,11 +20,23 @@ h1 {
 }
 
 .box {
-  max-width: 400px;
+  max-width: 900px;
+  min-width: 600px;
   margin: 50px auto;
   background: white;
   border-radius: 5px;
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+.save {
+  background-color: #a683e3;
+  height: 20px;
+  min-height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border-color: transparent;
+
+  border-width: 0;
 }
 
 #heading {
@@ -33,6 +45,11 @@ h1 {
 }
 form.edit {
   display: flex;
+}
+
+.logout {
+  min-height: 70px;
+  min-width: 180px;
 }
 
 .item {

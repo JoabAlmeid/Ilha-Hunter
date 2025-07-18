@@ -1,7 +1,9 @@
 <%- include('partials/header-hunter.ejs'); -%>
 
+<div class="box" id="heading">
+    <h1>Minhas Tarefas</h1>
+  </div>
 
-  <h1>Minhas Tarefas</h1>
 
     <div class="box">
   
@@ -53,8 +55,22 @@
           <input type="hidden" name="updatedItemId" value="<%= todo.id %>">
           <input id="input<%= todo.id %>" type="text" name="updatedItemTitle" value=" <%= todo.title %>" autocomplete="off"
             autofocus="true" hidden="true" />
-          <button id="done<%=todo.id%>" class="edit" type="submit" hidden><img class="icon"
-              src="/assets/icons/check-solid.svg" alt="tick image"></button>
+          <!-- <button id="done<%=todo.id%>" class="edit" type="submit" hidden><img class="icon"
+              src="/assets/icons/check-solid.svg" alt="tick image"></button> -->
+
+              <form action="/todos/edit/<%= todo.id %>" method="POST" style="display:inline;">
+          <input
+            type="text"
+            id="input-<%= todo.id %>"
+            name="title"
+            value="<%= todo.title %>"
+            style="display:none;"
+            oninput="handleInput(<%= todo.id %>)"
+          />
+          
+          <button type="submit" style="display:none;" id="saveBtn-<%= todo.id %>"><img class="icon"
+           src="/assets/icons/check-solid.svg"  alt="floppy disk"></button></button>
+        </form>
        
         
             <button type="button" id="editBtn-<%= todo.id %>" onclick="enableEdit(<%= todo.id %>)" class="edit"><img class="icon"
@@ -69,7 +85,7 @@
   </div>
 
   <form action="/logout" method="POST">
-    <button type="submit">Logout</button>
+    <button class="logout" type="submit">Logout</button>
   </form>
 </body>
 </html>

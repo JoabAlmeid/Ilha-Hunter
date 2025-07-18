@@ -10,43 +10,54 @@
   </head>
   <title>Minha To-Do List</title>
   <script>
-    function enableEdit(id) {
-      // Quando clickado em editar, todos os outros campos ficam assim. Sem isso, o segundo campo sendo editado não fecha o primeiro
-      document.querySelectorAll(".todo-item").forEach(item => {
-        const todoId = item.dataset.id;
-        const span = document.getElementById(`title-${todoId}`);
-        const input = document.getElementById(`input-${todoId}`);
-        const saveBtn = document.getElementById(`saveBtn-${todoId}`);
-        const editBtn = document.getElementById(`editBtn-${todoId}`);
-        
+  function enableEdit(id) {
+    // Esconde todos os outros campos de antes da edição
+    document.querySelectorAll(".todo-item").forEach(item => {
+      const todoId = item.dataset.id;
+      const span = document.getElementById(`title-${todoId}`);
+      const input = document.getElementById(`input-${todoId}`);
+      const saveBtn = document.getElementById(`saveBtn-${todoId}`);
+      const editBtn = document.getElementById(`editBtn-${todoId}`);
 
-        span.style.display = "inline";
-        input.style.display = "none";
-        saveBtn.style.display = "none";
-        editBtn.style.display = "inline";
-        
-      });
+      span.style.display = "inline";
+      input.style.display = "none";
+      saveBtn.style.display = "none";
+      editBtn.style.display = "inline";
+    });
 
-      // Torna o campo clickado uma excessão do código acima
-      document.getElementById(`title-${id}`).style.display = "none";
-      document.getElementById(`input-${id}`).style.display = "inline";
-      document.getElementById(`editBtn-${id}`).style.display = "none";
-     
-      const input = document.getElementById(`input-${id}`);
-      input.focus();
-      input.setSelectionRange(input.value.length, input.value.length);
+    // Obtém os elementos DOM correspondentes ao título e ao campo de input (e botões)
+    // Apenas repetindo o que foi feito acima com nome de constante diferente
+    const titleEl = document.getElementById(`title-${id}`);
+    const inputEl = document.getElementById(`input-${id}`);
+    const saveBtn = document.getElementById(`saveBtn-${id}`);
+    const editBtn = document.getElementById(`editBtn-${id}`);
 
-    }
+    // Copia o estilo do <p> para o input de edição
+    const style = window.getComputedStyle(titleEl);
+    inputEl.style.width = `${titleEl.offsetWidth}px`;
+    inputEl.style.fontSize = style.fontSize;
+    inputEl.style.fontFamily = style.fontFamily;
+    inputEl.style.fontWeight = style.fontWeight;
+    inputEl.style.padding = style.padding;
+    inputEl.style.margin = style.margin;
+    inputEl.style.border = "1px solid #ccc";
+    inputEl.style.boxSizing = "border-box";
 
-    function handleInput(id) {
-      document.getElementById(`saveBtn-${id}`).style.display = "inline";
-    }
-    function handler(id) {
-      document.getElementById("title" + id).setAttribute("hidden", true)
-      document.getElementById("edit" + id).setAttribute("hidden", true)
-      document.getElementById("done" + id).removeAttribute("hidden")
-      document.getElementById("input" + id).removeAttribute("hidden")
-    }
-  </script>
-</head>
-<body>
+    // Mostra input e botão de salvar, esconde o título e botão de editar
+    titleEl.style.display = "none";
+    inputEl.style.display = "inline-block";
+    editBtn.style.display = "none";
+    saveBtn.style.display = "inline-block";
+
+    //faz focar no novo input e joga o curso para além da última letra
+    inputEl.focus();
+    inputEl.setSelectionRange(inputEl.value.length, inputEl.value.length);
+  }
+
+  //faz o botão de salvar aparecer quando algo muda no input de edição
+  function handleInput(id) {
+    document.getElementById(`saveBtn-${id}`).style.display = "inline";
+  }
+
+  
+</script>
