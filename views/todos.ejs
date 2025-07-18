@@ -1,6 +1,6 @@
 <%- include('partials/header-hunter.ejs'); -%>
 
-<div class="box" id="heading">
+<div class="box-first" id="heading">
     <h1>Minhas Tarefas</h1>
   </div>
 
@@ -38,8 +38,14 @@
       </li>
       
       <% }) %>
+      
       </ul> -->
+      <form action="/todos/add" method="POST" class="first">
+          <input type="text" name="title" placeholder="Escreva sua nova tarefa aqui!" autocomplete="off" autofocus="true" required/>
+          <button class="add" type="submit" name="list">+</button>
+        </form>
       <% todos.forEach(todo => {%>
+        
       <div class="item">
         <form action="/todos/delete/<%= todo.id %>" class="delete" method="POST" style="display:inline;">
           <button type="submit"><img class="icon"
@@ -76,12 +82,10 @@
             <button type="button" id="editBtn-<%= todo.id %>" onclick="enableEdit(<%= todo.id %>)" class="edit"><img class="icon"
             src="/assets/icons/pencil-solid.svg" alt="pencil image"></button>
       </div>
+      
     <% }) %>
  
-  <form action="/todos/add" method="POST">
-          <input type="text" name="title" placeholder="Nova Tarefa" autocomplete="off" autofocus="true" required/>
-          <button class="add" type="submit" name="list">+</button>
-        </form>
+  
   </div>
 
   <form action="/logout" method="POST">
@@ -89,3 +93,6 @@
   </form>
 </body>
 </html>
+
+
+<%- include('partials/footer-first.ejs') %>

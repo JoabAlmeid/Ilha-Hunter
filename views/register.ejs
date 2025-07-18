@@ -1,12 +1,11 @@
 <%- include('partials/header-first.ejs') %>
-<div class="container mt-5">
-  <h1>Register</h1>
-
-  <div class="row">
-    <div class="col-sm-8">
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="row w-100">
+    <div class="col-sm-8 col-md-6 mx-auto">
       <div class="card">
-        <div class="card-body">
-          <!-- Makes POST request to /register route -->
+        <div class="card-body text-center">
+          <h1 class="register-title">Register</h1>
+          <!-- Register form -->
           <form action="/register" method="POST">
             <div class="form-group">
               <label for="email">Email</label>
@@ -21,18 +20,7 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="col-sm-4">
-      <div class="card social-block">
-        <div class="card-body">
-          <a class="btn btn-block" href="/auth/google" role="button">
-            <i class="fab fa-google"></i>
-            Sign Up with Google
-          </a>
-        </div>
-      </div>
-    </div> -->
   </div>
 </div>
 
-<%- include('partials/header-first.ejs') %>
+<%- include('partials/footer-first.ejs') %>

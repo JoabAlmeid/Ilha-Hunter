@@ -1,19 +1,40 @@
+/* Reset & base styles */
+html,
 body {
-  background-color: #e8ecef;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Helvetica Neue", sans-serif;
 }
 
+/* Diagonal background */
+body {
+  background: -webkit-linear-gradient(65deg, #a683e3 50%, #e4e9fd 50%);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Center the content */
 .centered {
-  padding-top: 200px;
   text-align: center;
+  color: #343a40;
 }
 
-.secret-text {
-  text-align: center;
-  font-size: 2rem;
-  color: #fff;
-  background-color: #000;
+.form-group label {
+  display: block;
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+/* Optional: tweak button spacing */
+.centered .btn {
+  margin: 10px;
 }
 
+/* Footer remains */
 footer {
   position: fixed;
   bottom: 0;
