@@ -7,6 +7,12 @@ body {
   font-family: "Helvetica Neue", sans-serif;
 }
 
+.card {
+  box-shadow: 0 40px 20px rgba(0, 0, 0, 0.1);
+  border: none; /* opcional: remove borda cinza padrão do Bootstrap */
+  border-radius: 1rem; /* garante arredondamento igual ao da home */
+}
+
 /* Diagonal background */
 body {
   background: -webkit-linear-gradient(65deg, #a683e3 50%, #e4e9fd 50%);
@@ -16,10 +22,19 @@ body {
   align-items: center;
 }
 
+.jumbotron.centered {
+  background-color: white;
+  padding: 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 40px 20px rgba(0, 0, 0, 0.1);
+  max-width: 480px;
+  margin: auto;
+}
+
 /* Center the content */
 .centered {
   text-align: center;
-  color: #343a40;
+  color: #3d3440;
 }
 
 .form-group label {

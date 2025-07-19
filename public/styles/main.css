@@ -25,6 +25,9 @@ main {
 h1 {
   color: #fff;
   padding: 10px;
+
+  border: none; /* opcional: remove borda cinza padrão do Bootstrap */
+  border-radius: 1rem; /* garante arredondamento igual ao da home */
 }
 
 .box {
@@ -32,10 +35,12 @@ h1 {
   min-width: 600px;
   margin: 50px auto;
   background: white;
-  border-radius: 5px;
-  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+
   padding-top: 40px;
   padding-left: 20px;
+  box-shadow: 0 40px 20px rgba(0, 0, 0, 0.1);
+  border: none; /* opcional: remove borda cinza padrão do Bootstrap */
+  border-radius: 1rem; /* garante arredondamento igual ao da home */
 }
 
 .box-first {
